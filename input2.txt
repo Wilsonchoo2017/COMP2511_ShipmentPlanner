@@ -1,0 +1,72 @@
+# Has 10 nodes
+# Some nodes has costly refueling time than the average
+
+Refuelling 70 Mitakihara
+Refuelling 100 Shiganshina
+Refuelling 200 Andy
+Refuelling 50 Emily
+Refuelling 35 Tom
+Refuelling 60 Trost
+Refuelling 80 Sydney
+Refuelling 150 Tammy
+Refuelling 40 Lucy
+Refuelling 50 Coruscant
+
+Time 23 Sydney Mitakihara
+Time 59 Sydney Shiganshina
+Time 24 Sydney Andy
+Time 53 Sydney Emily
+Time 52 Sydney Tom
+Time 98 Sydney Trost
+Time 31 Sydney Tammy
+Time 45 Sydney Lucy 
+Time 25 Sydney Coruscant
+
+Time 42 Mitakihara Shiganshina
+Time 53 Mitakihara Andy
+Time 12 Mitakihara Emily
+Time 56 Mitakihara Tom
+Time 53 Mitakihara Trost
+Time 45 Mitakihara Tammy
+Time 64 Mitakihara Lucy 
+Time 21 Mitakihara Coruscant
+ 
+Time 95 Shiganshina Andy
+Time 45 Shiganshina Emily
+Time 54 Shiganshina Tom
+Time 12 Shiganshina Trost
+Time 56 Shiganshina Tammy
+Time 85 Shiganshina Lucy
+Time 46 Shiganshina Coruscant
+
+Time 36 Andy Emily
+Time 83 Andy Tom
+Time 92 Andy Trost
+Time 47 Andy Tammy
+Time 85 Andy Lucy
+Time 10 Andy Coruscant
+
+Time 92 Emily Tom
+Time 16 Emily Trost
+Time 64 Emily Tammy
+Time 45 Emily Lucy 
+Time 67 Emily Coruscant
+
+Time 32 Tom Trost
+Time 54 Tom Tammy
+Time 46 Tom Lucy
+Time 42 Tom Coruscant
+
+Time 86 Trost Tammy
+Time 45 Trost Lucy
+Time 75 Trost Coruscant
+
+Time 75 Tammy Lucy
+Time 54 Tammy Coruscant
+
+Time 99 Lucy Coruscant
+
+Shipment Tom Shiganshina 
+Shipment Tom Mitakihara
+Shipment Tom Sydney
+Shipment Tammy Emily

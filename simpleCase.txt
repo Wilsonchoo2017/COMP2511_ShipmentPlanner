@@ -1,0 +1,8 @@
+Refuelling 6 Sydney             # Refuelling time is 6 days in Sydney 
+Refuelling 4 Shanghai           # Refuelling time is 4 days in Shanghai
+Refuelling 4 Singapore          # Refuelling time is 4 days in Singapore
+Time 18 Sydney Shanghai         # Travel time is 18 days from Sydney to Shanghai
+Time 24 Sydney Singapore        # Travel time is 24 days from Sydney to Singapore
+Time 10 Shanghai Singapore      # Travel time is 10 days from Shanghai to Singapore
+Shipment Singapore Shanghai
+Shipment Shanghai Singapore     # Shipment is required from Shanghai to Singapore
