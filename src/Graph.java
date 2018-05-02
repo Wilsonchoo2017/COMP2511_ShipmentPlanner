@@ -150,5 +150,12 @@ public class Graph {
 		return listOfNodes;
 	}
 	
+	public Node edgeFrom(Edge e) {
+		return findNodeInEdge(e);
+	}
+	public Node edgeTo(Edge e) {
+		Node n = findNodeInEdge(e);
+		return n.getNodeFromEdge(e, false);
+	}
 
 }

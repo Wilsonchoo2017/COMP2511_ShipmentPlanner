@@ -11,18 +11,6 @@ public class Edge implements Cloneable{
 		this.weight = weight;
 	}
 	
-	/**
-	 * 
-	 * @param currentNode 
-	 * @return either from or to depending on currentNode
-	 */
-	public Node getAdjacent(Node currentNode) {
-		if(!(currentNode.equals(from) || currentNode.equals(to))) {
-			return null;
-		}
-		
-		return currentNode.equals(from) ? to : from;
-	}
 	
 	/**
 	 * 
@@ -55,11 +43,5 @@ public class Edge implements Cloneable{
 		}
 		return false;
 	}
-	
-	public String toString() {
-		return "From: " + this.from.getName() + " To: " + this.to.getName() + " Weight: " +
-				this.weight;
-	}
-
 	
 }

@@ -1,19 +1,74 @@
-Refuelling 6 Sydney             # Refuelling time is 6 days in Sydney 
-Refuelling 4 Shanghai           # Refuelling time is 4 days in Shanghai
-Refuelling 4 Singapore          # Refuelling time is 4 days in Singapore
-Refuelling 6 Vancouver          # Refuelling time is 6 days in Vancouver
-Refuelling 8 Manila             # Refuelling time is 8 days in Manila
-Time 18 Sydney Shanghai         # Travel time is 18 days from Sydney to Shanghai
-Time 24 Sydney Singapore        # Travel time is 24 days from Sydney to Singapore
-Time 18 Sydney Vancouver        # Travel time is 18 days from Sydney to Vancouver
-Time 10 Sydney Manila           # Travel time is 10 days from Sydney to Manila
-Time 10 Shanghai Singapore      # Travel time is 10 days from Shanghai to Singapore
-Time 24 Shanghai Vancouver      # Travel time is 24 days from Shanghai to Vancouver
-Time 12 Shanghai Manila         # Travel time is 12 days from Shanghai to Manila
-Time 24 Singapore Vancouver     # Travel time is 24 days from Singapore to Vancouver
-Time 22 Singapore Manila        # Travel time is 22 days from Singapore to Manila
-Time 20 Vancouver Manila        # Travel time is 20 days from Vancouver to Manila
-Shipment Singapore Vancouver    # Shipment is required from Singapore to Vancouver
-Shipment Shanghai Singapore     # Shipment is required from Shanghai to Singapore
-Shipment Sydney Vancouver       # Shipment is required from Sydney to Vancouver
-Shipment Sydney Manila          # Shipment is required from Sydney to Manila
+# Has 10 nodes
+# Some nodes has costly refueling time than the average
+
+Refuelling 70 Mitakihara
+Refuelling 100 Shiganshina
+Refuelling 200 Andy
+Refuelling 50 Emily
+Refuelling 78 Tom
+Refuelling 60 Trost
+Refuelling 80 Sydney
+Refuelling 150 Tammy
+Refuelling 100 Lucy
+Refuelling 59 Coruscant
+
+Time 125 Sydney Mitakihara
+Time 290 Sydney Shiganshina
+Time 149 Sydney Andy
+Time 241 Sydney Emily
+Time 265 Sydney Tom
+Time 214 Sydney Trost
+Time 147 Sydney Tammy
+Time 152 Sydney Lucy 
+Time 251 Sydney Coruscant
+
+Time 445 Mitakihara Shiganshina
+Time 547 Mitakihara Andy
+Time 425 Mitakihara Emily
+Time 256 Mitakihara Tom
+Time 225 Mitakihara Trost
+Time 202 Mitakihara Tammy
+Time 100 Mitakihara Lucy 
+Time 321 Mitakihara Coruscant
+ 
+Time 201 Shiganshina Andy
+Time 300 Shiganshina Emily
+Time 192 Shiganshina Tom
+Time 180 Shiganshina Trost
+Time 132 Shiganshina Tammy
+Time 140 Shiganshina Lucy
+Time 102 Shiganshina Coruscant
+
+Time 114 Andy Emily
+Time 306 Andy Tom
+Time 382 Andy Trost
+Time 304 Andy Tammy
+Time 309 Andy Lucy
+Time 399 Andy Coruscant
+
+Time 205 Emily Tom
+Time 141 Emily Trost
+Time 204 Emily Tammy
+Time 101 Emily Lucy 
+Time 261 Emily Coruscant
+
+Time 123 Tom Trost
+Time 240 Tom Tammy
+Time 465 Tom Lucy
+Time 302 Tom Coruscant
+
+Time 201 Trost Tammy
+Time 301 Trost Lucy
+Time 120 Trost Coruscant
+
+Time 201 Tammy Lucy
+Time 200 Tammy Coruscant
+
+Time 140 Lucy Coruscant
+
+Shipment Mitakihara Shiganshina 
+Shipment Tom Mitakihara
+Shipment Andy Sydney
+Shipment Tammy Emily
+Shipment Shiganshina Lucy
+Shipment Shiganshina Coruscant

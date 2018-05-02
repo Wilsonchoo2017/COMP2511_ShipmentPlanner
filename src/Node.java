@@ -14,7 +14,6 @@ public class Node {
 	public Node(String name, int refuellingTime) {
 		this.name = name;
 		this.refuellingTime = refuellingTime;
-
 		this.listOfEdges = new ArrayList<Edge>();
 	}
 	
@@ -37,7 +36,10 @@ public class Node {
 		}
 		this.listOfEdges.add(edge);
 	}
-	
+	/**
+	 * @param to
+	 * @return the weight of edge.
+	 */
 	public int getEdgeWeight(Node to) {
 		for(Edge e :  listOfEdges) if(this.equals(e.getFrom()) && to.equals(e.getTo())){
 			return e.getWeight();
@@ -45,6 +47,10 @@ public class Node {
 		return -1;
 	}
 	
+	/**
+	 * copys an copy of the list of neighbornode in this code.
+	 * @return the copied arraylist
+	 */
 	public List<Node> getNeighborNode() {
 		List<Node> listOfNeighborNode = new ArrayList<Node>();
 		for(Edge e: listOfEdges) {
@@ -53,6 +59,11 @@ public class Node {
 		return listOfNeighborNode;
 	}
 
+	/**
+	 * find the edge from this to dest
+	 * @param to
+	 * @return null if cant found, otherwise the edge
+	 */
 	public Edge findEdge(Node to) {
 		for (Edge e: listOfEdges) if (e.getFrom().equals(this) && e.getTo().equals(to)) {
 			return e;
@@ -60,6 +71,14 @@ public class Node {
 		return null;
 	}
 	
+	/**
+	 * get the adjacent node of the Edge e
+	 * if node = true, return to
+	 * if node = false, return from
+	 * @param e
+	 * @param node
+	 * @return returns the adjacent node
+	 */
 	public Node getNodeFromEdge(Edge e, Boolean node) {
 		return e.getAdjacent(node);
 	}
@@ -71,7 +90,6 @@ public class Node {
 	
 	/**
 	 * name is unique, (from the spec)
-	 * 
 	 */
 	@Override
 	public boolean equals(Object  o) {
@@ -81,15 +99,11 @@ public class Node {
 			return this.name.equals(another.name) && this.refuellingTime == another.refuellingTime;
 		}
 		return false;
-	}	
-	
+	}
+	/**
+	 * prints node's name
+	 */
 	public String toString() {
 		return  this.name;
 	}
-	/* debuging
-	public String toString() {
-		return "Name: " + this.name + " Refuelling Time: " + this.refuellingTime + " List of Edges are: " +
-				listOfEdges;
-	}*/ 
-
 }

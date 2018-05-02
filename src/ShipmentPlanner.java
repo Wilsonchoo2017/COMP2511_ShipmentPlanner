@@ -1,6 +1,10 @@
 import java.io.*;
 import java.util.*;
 
+/**
+ * Using A* algo and find the shortest path to complete the required shipments.
+ * @author Choo Yee Hang z5157656
+ */
 public class ShipmentPlanner implements Cloneable{
 	private ArrayList<Edge> listOfShipment = new ArrayList<Edge>();
 	private Graph g = new Graph();
@@ -29,18 +33,10 @@ public class ShipmentPlanner implements Cloneable{
 	            arg = new String[noComment.size()];
 	            noComment.toArray(arg);
 		        if (arg.length == 0) continue;
-		        system.excuteCommand(arg);
+		        system.executeCommand(arg);
 		            
 	          }      
 	          
-	          //start debugging
-//	          System.out.println(system.listOfShipment);
-//	          for(Node n: system.g.getListOfNodes()) {
-//		          System.out.println(n);
-//		          for(Edge e: n.getListOfEdges()) {
-//		        	  System.out.println(e);
-//		          }
-//	          }
 	          //start find path
 	          
 	          Node start = system.g.findNode("Sydney");
@@ -61,7 +57,14 @@ public class ShipmentPlanner implements Cloneable{
 
 	}
 	
-	public void excuteCommand(String[] arg) {
+	/**
+	 * a method that execute the 3 commands from input: "Refuelling, Time and Shipment"
+	 * refueling - adds node
+	 * time - adds edge
+	 * shipment - finds the edge and add it to the arraylist of listOfShipment
+	 * @param arg
+	 */
+	public void executeCommand(String[] arg) {
 		switch(arg[0]) {
 			case "Refuelling":
 				g.addNode(arg[2], Integer.parseInt(arg[1]));
@@ -81,17 +84,29 @@ public class ShipmentPlanner implements Cloneable{
 		}
 	}
 	
+	/**
+	 * this method handles the output that needs to be printed out.
+	 * No other place in the project should print.
+	 * @param path
+	 */
 	public void printOutput(List<Edge> path) {
 		System.out.println(nodesExpanded + " nodes expanded");
+		if(path == null) {
+			return;
+		}
 		int cost = calculateGCost(path);
 		System.out.println("cost = " + cost);
 		for(Edge e: path) {
-			System.out.println("Ship " + e.getFrom() + " to " + e.getTo());
+			System.out.println("Ship " + g.edgeFrom(e) + " to " + g.edgeTo(e));
 		}
 	}
 	
+	/**
+	 * Uses A* algo to find the optimal path;
+	 * @param start
+	 * @return ArrayList<Edge> path
+	 */
 	public List<Edge> findPath(Node start) {		
-
 		Comparator<Trip> fScorecomparator = new Comparator<Trip>() {
             @Override
             public int compare(Trip o1, Trip o2) {
@@ -102,44 +117,32 @@ public class ShipmentPlanner implements Cloneable{
         };
 
         //openSET
-		PriorityQueue<Trip> PQTrip = new PriorityQueue<Trip>(fScorecomparator);
-		//closeset
-		ArrayList<Trip> closeTrip = new ArrayList<Trip>();
+		final PriorityQueue<Trip> PQTrip = new PriorityQueue<Trip>(fScorecomparator);
+		//closeSET
+		Set<Trip> exploredTrips = new HashSet<Trip>();
 
 		//put starting node into queue
 		int GCost = calculateGCost(null);
 		int FCost = calculateFCost(GCost, listOfShipment);
-		Trip newT = new Trip(listOfShipment ,null, GCost, FCost, null,start, null);
-
-
+		Trip newT = new Trip(listOfShipment, null, GCost, FCost, null,start, null);
 		PQTrip.add(newT);
-		
-		//debug
-		List<Trip> ListT = new ArrayList<Trip>();
-		int n = 1;
-		Trip last = newT;
+		exploredTrips.add(newT);
+
+
 		while(!PQTrip.isEmpty()){
-			System.out.println("iteration:"+ n);
-			boolean foundSmaller = false;
 			Trip current = PQTrip.poll();
 			Node currentNode = current.getTo();
 			nodesExpanded++;
-	
-	
 			if(!PQTrip.isEmpty()) {
 				for(Edge e: current.getTripPath()) if(current.getListOfUncompletedShipment().contains(e)){
 					current.removeUncompletedShipment(e);
-					System.out.print("removing:");
-					System.out.println(e);
 				}
-				System.out.print("Selecting: ");
-				System.out.println("No = " + current.getListOfUncompletedShipment().size()+ " "+current);
+				exploredTrips.add(current);
 			}
 			
-			
 			for(Edge e: current.getListOfUncompletedShipment()) {
-				Node shipmentFrom = e.getFrom();
-				Node shipmentTo = e.getTo();
+				Node shipmentFrom = g.edgeFrom(e);
+				Node shipmentTo = g.edgeTo(e);
 				List<Edge> currentToShipment = new ArrayList<Edge>();
 				if(!g.getNodeName(currentNode).equals(g.getNodeName(shipmentFrom)) ) {
 					Edge currentToFrom = g.findEdge(currentNode, shipmentFrom);
@@ -148,65 +151,36 @@ public class ShipmentPlanner implements Cloneable{
 				currentToShipment.add(e);
 				
 				ArrayList<Edge> clone = (ArrayList<Edge>) current.getListOfUncompletedShipment().clone();
-			    GCost = calculateGCost(currentToShipment);
+				GCost = calculateGCost(reorderPath(current)) + calculateGCost(currentToShipment);
 				FCost = calculateFCost(GCost, clone);
-
-				newT = new Trip(clone, currentToShipment, GCost, GCost,currentNode, shipmentTo, current);
+				newT = new Trip(clone, currentToShipment, GCost, FCost,currentNode, shipmentTo, current);
 						
-				
-				//debug
-				ListT.add(newT);
-				
-				
-				if(PQTrip.isEmpty()) {
-					PQTrip.add(newT);
+				if(exploredTrips.contains(newT) && current.getTripFCost() >= FCost) {
 					continue;
-				}
-
-				Trip topPQ = PQTrip.peek();
-				if(topPQ.getTripFCost() <= current.getTripFCost()) {
-					foundSmaller = true;
-			//		System.out.println("SMALLER!");
-					continue;
-				}		
-				if(PQTrip.contains(newT)) {
-					if() {
-						
+				} else if(!PQTrip.contains(newT)|| current.getTripFCost() < FCost){
+					if(PQTrip.contains(newT)) {
+						PQTrip.remove(newT);
 					}
-				}
-				
-	
+					PQTrip.add(newT);
+				}		
 			}
-
-	
-			if(current.getListOfUncompletedShipment().size() == 0 && foundSmaller == false) {
-				last = current;
-//				System.out.println("COMPLETED!");
-//				System.out.println("Last: " + current);
-				break;
-				
+			if(current.getListOfUncompletedShipment().size() == 0) {
+				return reorderPath(current); 
 			}
-			
-//			System.out.println("Changes:");
-			for(Trip t: PQTrip) {
-				System.out.println("No = " + t.getListOfUncompletedShipment().size() +" "+ t);
-			}		
-
-			n++;
 		}
-		
-//		System.out.println("Camefrom:");
-//		System.out.println(reorderPath(last));
 			
-		return reorderPath(last); 
+		return null; 
 			
 	}
 	
+	/**
+	 * reverse the path using collections.reverse(path)
+	 * @param current
+	 * @return reversedPath
+	 */
 	public List<Edge> reorderPath(Trip current) {
 		List<Edge> path = new ArrayList<Edge>();
 		while(current.getCameFrom() != null) {
-
-//			System.out.println(current.getTripPath());
 			for(int i = current.getTripPath().size() - 1; i >= 0 ; i-- ) {
 				path.add(current.getTripPath().get(i));
 			}
@@ -216,17 +190,28 @@ public class ShipmentPlanner implements Cloneable{
 		return path;
 	}
 	
+	/**
+	 * 
+	 * @param tripPath
+	 * @return g cost for the tripPath
+	 */
 	public int calculateGCost(List<Edge> tripPath) {
 		int cost = 0;
 		if(tripPath == null) return 0;
 		for(Edge e: tripPath) {
-			Node from = e.getFrom();
-			Node to = e.getTo();
+			Node from = g.edgeFrom(e);
+			Node to = g.edgeTo(e);
 			cost = cost + from.getEdgeWeight(to) + from.getRefuellingTime();
 		}
 		return cost;
 	}
-	
+
+	/**
+	 * uses heuristic defined in teh heuristic class
+	 * @param GCost
+	 * @param listOfUncompletedShipment
+	 * @return gCost + hCost
+	 */
 	public int calculateFCost(int GCost, ArrayList<Edge> listOfUncompletedShipment) {
 		HSS = new CalculateUsingNumberOfGoal();
 		return GCost + HSS.calculateHeuristicValue(listOfUncompletedShipment, g);

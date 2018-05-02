@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ * 
+ * a state class to store information of the state
+ */
 public class Trip {
 	private final ArrayList<Edge> uncompletedShipment;
 	private final List<Edge> tripPath; 
@@ -30,7 +34,7 @@ public class Trip {
 		return to;
 	}
 
-	public Trip(ArrayList<Edge> uncompletedShipment,List<Edge> tripPath, int tripGCost, int tripFCost, Node from, Node to, Trip cameFrom) {
+	public Trip(ArrayList<Edge> uncompletedShipment, List<Edge> tripPath, int tripGCost, int tripFCost, Node from, Node to, Trip cameFrom) {
 		this.tripPath = tripPath;
 		this.tripGCost = tripGCost;
 		this.tripFCost = tripFCost;
@@ -50,34 +54,8 @@ public class Trip {
 	public ArrayList<Edge> getListOfUncompletedShipment() {
 		return uncompletedShipment;
 	}
-	
-	
 
 	public Trip getCameFrom() {
 		return cameFrom;
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if ( o == this) return true;
-		if (getClass().equals(o.getClass())) {
-			Trip another = (Trip) o;
-			return this.tripPath.equals(another.tripPath) && this.cameFrom.equals(another.cameFrom);
-		}
-		return false;
-	}
-
-	public String toString() {
-		return "GCost: " + tripGCost + 
-				" FCost: " + tripFCost +
-				" CameFrom: " + cameFrom.getTo().getName() +
-				" From: " + from.getName() +
-				" to: " + to.getName() +
-				" TripPath: " + tripPath +
-				" UncompletedTrips: " + uncompletedShipment;	
-	}
-	
-	
-	
-	
+	}	
 }

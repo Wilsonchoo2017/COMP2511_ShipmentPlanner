@@ -4,47 +4,26 @@ public interface HeuristicSearchStrategy {
 	public int calculateHeuristicValue(ArrayList<Edge> listOfShipment, Graph g);
 	
 }
-
+/**
+ * this heuristic basically just gets the least cost of both edge's weight and the node refuelling cost
+ * this is admissable as the path needs to go through every shipment in the arraylist at least once. 
+ * therefore getting the least cost will always be lower than the actual cost.
+ * 
+ */
 class CalculateUsingNumberOfGoal implements HeuristicSearchStrategy{
 	
 	public int calculateHeuristicValue(ArrayList<Edge> listOfShipment, Graph g) {
 		int WeightMinValue = Integer.MAX_VALUE;
-		int refuellingMaxValue = 0;
 		int refuellingMinValue = Integer.MAX_VALUE;
 		
-		for(Node x: g.getListOfNodes()) {
-			for(Node y: x.getNeighborNode()) {
-				
-				if(WeightMinValue > g.getEdgeWeight(x, y)) {
-					WeightMinValue = g.getEdgeWeight(x, y);
-				}
-			}
-		}
 		for(Edge e: listOfShipment) {
 			if(refuellingMinValue > g.getEdgeRefuellingCost(e, true)) {
 				refuellingMinValue = g.getEdgeRefuellingCost(e, true);
 			}
-			if(refuellingMaxValue < g.getEdgeRefuellingCost(e, true)) {
-				refuellingMaxValue = g.getEdgeRefuellingCost(e, true);
+			if(WeightMinValue > g.getEdgeWeight(g.edgeFrom(e), g.edgeTo(e)))  {
+				WeightMinValue =  g.getEdgeWeight(g.edgeFrom(e), g.edgeTo(e));
 			}
 		}
-		
-		int refuellingDifference = Math.abs(refuellingMaxValue - refuellingMinValue);
-		int ratio = 0;
-
-
-	
-		if( WeightMinValue < refuellingDifference && WeightMinValue != 0) {
-			ratio = refuellingDifference/WeightMinValue;
-			return  (WeightMinValue+ refuellingMinValue) * listOfShipment.size() / (ratio * listOfShipment.size());
-		} else {
-			if(refuellingDifference == 0) {
-				return  (WeightMinValue + refuellingMinValue) * listOfShipment.size();
-			}
-			return  (WeightMinValue + refuellingMinValue) * listOfShipment.size();
-		}
+		return  (WeightMinValue + refuellingMinValue) * listOfShipment.size();
 	}
-
-	
-
 }

@@ -1,5 +1,5 @@
 # Has 10 nodes
-# Some nodes has costly refueling time than the average
+# Some nodes has 0 refueling time 
 
 Refuelling 0 Mitakihara
 Refuelling 0 Shiganshina
