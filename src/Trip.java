@@ -58,4 +58,13 @@ public class Trip {
 	public Trip getCameFrom() {
 		return cameFrom;
 	}	
+	public String toString() {
+		return "GCost: " + tripGCost + 
+				" FCost: " + tripFCost +
+				" CameFrom: " + cameFrom.getTo().getName() +
+				" From: " + from.getName() +
+				" to: " + to.getName() +
+				" TripPath: " + tripPath +
+				" UncompletedTrips: " + uncompletedShipment;	
+	}
 }

@@ -17,13 +17,16 @@ class CalculateUsingNumberOfGoal implements HeuristicSearchStrategy{
 		int refuellingMinValue = Integer.MAX_VALUE;
 		
 		for(Edge e: listOfShipment) {
-			if(refuellingMinValue > g.getEdgeRefuellingCost(e, true)) {
-				refuellingMinValue = g.getEdgeRefuellingCost(e, true);
+			Node from = g.edgeFrom(e);
+			Node to = g.edgeTo(e);
+			
+			if(refuellingMinValue > g.getRefuellingTime(from)) {
+				refuellingMinValue = g.getRefuellingTime(from);
 			}
-			if(WeightMinValue > g.getEdgeWeight(g.edgeFrom(e), g.edgeTo(e)))  {
-				WeightMinValue =  g.getEdgeWeight(g.edgeFrom(e), g.edgeTo(e));
+			if(WeightMinValue > g.getEdgeWeight(from, to))  {
+				WeightMinValue =  g.getEdgeWeight(from, to);
 			}
 		}
-		return  (WeightMinValue + refuellingMinValue) * listOfShipment.size();
+		return  (WeightMinValue + refuellingMinValue) * (listOfShipment.size() - 1);
 	}
 }

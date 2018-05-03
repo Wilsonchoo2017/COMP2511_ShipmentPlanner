@@ -44,4 +44,9 @@ public class Edge implements Cloneable{
 		return false;
 	}
 	
+	public String toString() {
+		return "From: " + this.from.getName() + " To: " + this.to.getName() + " Weight: " +
+				this.weight;
+	}
+	
 }

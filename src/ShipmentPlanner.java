@@ -128,7 +128,6 @@ public class ShipmentPlanner implements Cloneable{
 		PQTrip.add(newT);
 		exploredTrips.add(newT);
 
-
 		while(!PQTrip.isEmpty()){
 			Trip current = PQTrip.poll();
 			Node currentNode = current.getTo();
@@ -136,8 +135,16 @@ public class ShipmentPlanner implements Cloneable{
 			if(!PQTrip.isEmpty()) {
 				for(Edge e: current.getTripPath()) if(current.getListOfUncompletedShipment().contains(e)){
 					current.removeUncompletedShipment(e);
+					System.out.print("removing:");
+					System.out.println(e);
 				}
 				exploredTrips.add(current);
+				if(current.getListOfUncompletedShipment().size() == 0) {
+					return reorderPath(current); 
+				}
+				System.out.print("Selecting: ");
+				System.out.println("No = " + current.getListOfUncompletedShipment().size()+ " "+current);
+				System.out.println("Path: " + reorderPath(current));
 			}
 			
 			for(Edge e: current.getListOfUncompletedShipment()) {
@@ -153,8 +160,7 @@ public class ShipmentPlanner implements Cloneable{
 				ArrayList<Edge> clone = (ArrayList<Edge>) current.getListOfUncompletedShipment().clone();
 				GCost = calculateGCost(reorderPath(current)) + calculateGCost(currentToShipment);
 				FCost = calculateFCost(GCost, clone);
-				newT = new Trip(clone, currentToShipment, GCost, FCost,currentNode, shipmentTo, current);
-						
+				newT = new Trip(clone, currentToShipment, GCost, GCost,currentNode, shipmentTo, current);
 				if(exploredTrips.contains(newT) && current.getTripFCost() >= FCost) {
 					continue;
 				} else if(!PQTrip.contains(newT)|| current.getTripFCost() < FCost){
@@ -162,12 +168,11 @@ public class ShipmentPlanner implements Cloneable{
 						PQTrip.remove(newT);
 					}
 					PQTrip.add(newT);
-				}		
-			}
-			if(current.getListOfUncompletedShipment().size() == 0) {
-				return reorderPath(current); 
+				}	
+
 			}
 		}
+		
 			
 		return null; 
 			
