@@ -1,72 +1,42 @@
-# Has 10 nodes
+# Has 6 nodes
 # Some nodes has 0 refueling time 
 
 Refuelling 0 Mitakihara
 Refuelling 0 Shiganshina
 Refuelling 0 Andy
 Refuelling 0 Emily
-Refuelling 0 Tom
-Refuelling 0 Trost
 Refuelling 0 Sydney
 Refuelling 0 Tammy
 Refuelling 0 Lucy
-Refuelling 0 Coruscant
 
-Time 233 Sydney Mitakihara
-Time 59 Sydney Shiganshina
-Time 241 Sydney Andy
-Time 53 Sydney Emily
-Time 524 Sydney Tom
-Time 986 Sydney Trost
-Time 31 Sydney Tammy
-Time 453 Sydney Lucy 
-Time 251 Sydney Coruscant
+Time 125 Sydney Mitakihara
+Time 290 Sydney Shiganshina
+Time 149 Sydney Andy
+Time 241 Sydney Emily
+Time 147 Sydney Tammy
+Time 152 Sydney Lucy 
 
-Time 42 Mitakihara Shiganshina
-Time 532 Mitakihara Andy
-Time 12 Mitakihara Emily
-Time 565 Mitakihara Tom
-Time 537 Mitakihara Trost
-Time 458 Mitakihara Tammy
-Time 64 Mitakihara Lucy 
-Time 219 Mitakihara Coruscant
+Time 410 Mitakihara Shiganshina
+Time 360 Mitakihara Andy
+Time 280 Mitakihara Emily
+Time 157 Mitakihara Tammy
+Time 277 Mitakihara Lucy 
  
-Time 95 Shiganshina Andy
-Time 453 Shiganshina Emily
-Time 545 Shiganshina Tom
-Time 12 Shiganshina Trost
-Time 564 Shiganshina Tammy
-Time 85 Shiganshina Lucy
-Time 462 Shiganshina Coruscant
+Time 265 Shiganshina Andy 
+Time 472 Shiganshina Emily
+Time 400 Shiganshina Tammy
+Time 399 Shiganshina Lucy
 
-Time 36 Andy Emily
-Time 831 Andy Tom
-Time 92 Andy Trost
-Time 47 Andy Tammy
-Time 854 Andy Lucy
-Time 10 Andy Coruscant
+Time 358 Andy Emily
+Time 257 Andy Tammy
+Time 287 Andy Lucy
 
-Time 92 Emily Tom
-Time 16 Emily Trost
-Time 641 Emily Tammy
-Time 45 Emily Lucy 
-Time 672 Emily Coruscant
+Time 377 Emily Tammy
+Time 346 Emily Lucy
 
-Time 322 Tom Trost
-Time 54 Tom Tammy
-Time 465 Tom Lucy
-Time 42 Tom Coruscant
+Time 288 Tammy Lucy
 
-Time 86 Trost Tammy
-Time 45 Trost Lucy
-Time 753 Trost Coruscant
-
-Time 75 Tammy Lucy
-Time 545 Tammy Coruscant
-
-Time 999 Lucy Coruscant
-
-Shipment Tom Shiganshina 
-Shipment Tom Mitakihara
-Shipment Tom Sydney
+Shipment Lucy Shiganshina 
+Shipment Lucy Mitakihara
+Shipment Lucy Sydney
 Shipment Tammy Emily

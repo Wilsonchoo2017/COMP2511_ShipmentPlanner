@@ -57,6 +57,7 @@ public class ShipmentPlanner implements Cloneable{
 
 	}
 	
+	
 	/**
 	 * a method that execute the 3 commands from input: "Refuelling, Time and Shipment"
 	 * refueling - adds node
@@ -83,6 +84,7 @@ public class ShipmentPlanner implements Cloneable{
 				break;
 		}
 	}
+
 	
 	/**
 	 * this method handles the output that needs to be printed out.
@@ -100,6 +102,7 @@ public class ShipmentPlanner implements Cloneable{
 			System.out.println("Ship " + g.edgeFrom(e) + " to " + g.edgeTo(e));
 		}
 	}
+	
 	
 	/**
 	 * Uses A* algo to find the optimal path;
@@ -131,20 +134,17 @@ public class ShipmentPlanner implements Cloneable{
 		while(!PQTrip.isEmpty()){
 			Trip current = PQTrip.poll();
 			Node currentNode = current.getTo();
-			nodesExpanded++;
+			nodesExpanded++; // pop queue = nodes expanded + 1;
+			
+			//Run these statements after the first time. 
 			if(!PQTrip.isEmpty()) {
 				for(Edge e: current.getTripPath()) if(current.getListOfUncompletedShipment().contains(e)){
 					current.removeUncompletedShipment(e);
-					System.out.print("removing:");
-					System.out.println(e);
 				}
 				exploredTrips.add(current);
 				if(current.getListOfUncompletedShipment().size() == 0) {
 					return reorderPath(current); 
 				}
-				System.out.print("Selecting: ");
-				System.out.println("No = " + current.getListOfUncompletedShipment().size()+ " "+current);
-				System.out.println("Path: " + reorderPath(current));
 			}
 			
 			for(Edge e: current.getListOfUncompletedShipment()) {
@@ -160,7 +160,8 @@ public class ShipmentPlanner implements Cloneable{
 				ArrayList<Edge> clone = (ArrayList<Edge>) current.getListOfUncompletedShipment().clone();
 				GCost = calculateGCost(reorderPath(current)) + calculateGCost(currentToShipment);
 				FCost = calculateFCost(GCost, clone);
-				newT = new Trip(clone, currentToShipment, GCost, GCost,currentNode, shipmentTo, current);
+				newT = new Trip(clone, currentToShipment, GCost, FCost,currentNode, shipmentTo, current);
+				
 				if(exploredTrips.contains(newT) && current.getTripFCost() >= FCost) {
 					continue;
 				} else if(!PQTrip.contains(newT)|| current.getTripFCost() < FCost){
@@ -171,11 +172,8 @@ public class ShipmentPlanner implements Cloneable{
 				}	
 
 			}
-		}
-		
-			
-		return null; 
-			
+		}		
+		return null; 	
 	}
 	
 	/**
@@ -206,7 +204,7 @@ public class ShipmentPlanner implements Cloneable{
 		for(Edge e: tripPath) {
 			Node from = g.edgeFrom(e);
 			Node to = g.edgeTo(e);
-			cost = cost + from.getEdgeWeight(to) + from.getRefuellingTime();
+			cost = cost + g.getEdgeWeight(from, to) + g.getRefuellingTime(from);
 		}
 		return cost;
 	}

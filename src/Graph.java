@@ -2,16 +2,16 @@ import java.util.*;
 
 public class Graph {
 	private List<Node> listOfNodes;
-	private int size;
 
+	
 	/**
 	 * initialise the graph
 	 */
 	public Graph() {
 		this.listOfNodes = new ArrayList<Node>();
-		this.size = 0;
 	}
 
+	
 	/**
 	 * creates a new node and add it to the list of Nodes
 	 * @param name
@@ -20,16 +20,8 @@ public class Graph {
 	public void addNode(String name, int refuellingTime) {
 		Node n = new Node(name, refuellingTime);
 		this.listOfNodes.add(n);
-		this.size = size++;
 	}
 	
-	/**
-	 * @return size of graph
-	 */
-	public int getSize() {
-		return size;
-	}
-
 	
 	/**
 	 * add edge between to and from.
@@ -43,18 +35,8 @@ public class Graph {
 		Node toNode = findNode(to);
 		fromNode.addEdge(toNode, weight);
 		toNode.addEdge(fromNode, weight);
-
 	}
 	
-	/**
-	 * Gets the weight of the edge
-	 * @param from
-	 * @param to
-	 * @return -1 if no edge, the weight otherwise
-	 */
-	public int getWeight(Node from, Node to) {
-		return from.getEdgeWeight(to);
-	}
 	
 	/**
 	 * Gets Refuelling Cost of a Node
@@ -63,17 +45,6 @@ public class Graph {
 		return node.getRefuellingTime();
 	}
 	
-	
-	/**
-	 * Gets all nodes that have edges coming from 'from'
-	 * @param from
-	 * @return null if node does not exist
-	 */
-	public List<Node> getAdjacent(Node from){
-		List<Node> listOfAdjacentNodes = from.getNeighborNode();
-		if (listOfAdjacentNodes.isEmpty()) return null;
-		return listOfAdjacentNodes;
-	}
 	
 	/**
 	 * @param Node's Name
@@ -86,6 +57,7 @@ public class Graph {
 		return null;
 	}
 	
+	
 	/**
 	 * @param node
 	 * @return node's name
@@ -94,6 +66,7 @@ public class Graph {
 		return node.getName();
 	}
 
+	
 	/**
 	 * find the edge Source: fromNode to Destination: toNode
 	 * @param fromNode
@@ -104,6 +77,7 @@ public class Graph {
 		if(fromNode == null || toNode == null) return null;
 		return fromNode.findEdge(toNode);
 	}
+	
 	
 	/**
 	 * @param e
@@ -118,30 +92,17 @@ public class Graph {
 		return null;
 	}
 	
-/**
- * find the nodes that contains Edge e 
- *  then get's the node's refuelling time
- * @param e
- * @param node
- * @return 
- */
-	
-	public int getEdgeRefuellingCost(Edge e, Boolean node) {	
-		Node n = findNodeInEdge(e);
-		Node wantedN = n.getNodeFromEdge(e, node);
-		return wantedN.getRefuellingTime();
-	}
 	
 	/**
-	 * find the edge Source: fromNode to Destination: toNode
-	 * and gets it's weight
-	 * @param fromNode
-	 * @param toNode
-	 * @return Edge's Weight
+	 * Gets the weight of the edge
+	 * @param from
+	 * @param to
+	 * @return -1 if no edge, the weight otherwise
 	 */
 	public int getEdgeWeight(Node fromNode, Node toNode) {
 		return fromNode.getEdgeWeight(toNode);
 	}
+
 	
 	/**
 	 * @return all the nodes exist in the graph
@@ -150,9 +111,22 @@ public class Graph {
 		return listOfNodes;
 	}
 	
+	
+	/**
+	 * Using the parameter e, we find the edge
+	 * @param e
+	 * @return edge's from node
+	 */
 	public Node edgeFrom(Edge e) {
 		return findNodeInEdge(e);
 	}
+	
+	
+	/**
+	 * Using the parameter e, we find the edge
+	 * @param e
+	 * @return edge's to node
+	 */
 	public Node edgeTo(Edge e) {
 		Node n = findNodeInEdge(e);
 		return n.getNodeFromEdge(e, false);

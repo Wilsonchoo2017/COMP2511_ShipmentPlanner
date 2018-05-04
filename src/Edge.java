@@ -12,6 +12,21 @@ public class Edge implements Cloneable{
 	}
 	
 	
+	public Node getFrom() {
+		return from;
+	}
+
+	
+	public Node getTo() {
+		return to;
+	}
+
+	
+	public int getWeight() {
+		return this.weight;
+	}
+	
+	
 	/**
 	 * 
 	 * @param node
@@ -20,19 +35,7 @@ public class Edge implements Cloneable{
 	public Node getAdjacent(Boolean node) {		
 		return node.equals(true) ? from : to;
 	}
-
 	
-	public Node getFrom() {
-		return from;
-	}
-
-	public Node getTo() {
-		return to;
-	}
-
-	public int getWeight() {
-		return this.weight;
-	}
 	
 	@Override
 	public boolean equals(Object o) {

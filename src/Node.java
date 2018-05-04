@@ -47,17 +47,6 @@ public class Node {
 		return -1;
 	}
 	
-	/**
-	 * copys an copy of the list of neighbornode in this code.
-	 * @return the copied arraylist
-	 */
-	public List<Node> getNeighborNode() {
-		List<Node> listOfNeighborNode = new ArrayList<Node>();
-		for(Edge e: listOfEdges) {
-			listOfNeighborNode.add(e.getTo());
-		}
-		return listOfNeighborNode;
-	}
 
 	/**
 	 * find the edge from this to dest

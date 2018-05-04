@@ -13,26 +13,7 @@ public class Trip {
 	private final Node from;
 	private final Node to;
 
-	
-	public List<Edge> getTripPath() {
-		return tripPath;
-	}
 
-	public int getTripGCost() {
-		return tripGCost;
-	}
-
-	public int getTripFCost() {
-		return tripFCost;
-	}
-
-	public Node getFrom() {
-		return from;
-	}
-
-	public Node getTo() {
-		return to;
-	}
 
 	public Trip(ArrayList<Edge> uncompletedShipment, List<Edge> tripPath, int tripGCost, int tripFCost, Node from, Node to, Trip cameFrom) {
 		this.tripPath = tripPath;
@@ -45,26 +26,46 @@ public class Trip {
 	}
 
 	
-	
-	public void removeUncompletedShipment(Edge completedShipment) {
-		uncompletedShipment.remove(completedShipment);
+	public List<Edge> getTripPath() {
+		return tripPath;
 	}
+
 	
+	public int getTripGCost() {
+		return tripGCost;
+	}
+
 	
-	public ArrayList<Edge> getListOfUncompletedShipment() {
-		return uncompletedShipment;
+	public int getTripFCost() {
+		return tripFCost;
+	}
+
+	
+	public Node getFrom() {
+		return from;
+	}
+
+	
+	public Node getTo() {
+		return to;
 	}
 
 	public Trip getCameFrom() {
 		return cameFrom;
 	}	
-	public String toString() {
-		return "GCost: " + tripGCost + 
-				" FCost: " + tripFCost +
-				" CameFrom: " + cameFrom.getTo().getName() +
-				" From: " + from.getName() +
-				" to: " + to.getName() +
-				" TripPath: " + tripPath +
-				" UncompletedTrips: " + uncompletedShipment;	
+
+	
+	public ArrayList<Edge> getListOfUncompletedShipment() {
+		return uncompletedShipment;
 	}
+
+
+	/**
+	 * remove the shipment in uncompletedshipment base on parameter	
+	 * @param completedShipment
+	 */
+	public void removeUncompletedShipment(Edge completedShipment) {
+		uncompletedShipment.remove(completedShipment);
+	}
+		
 }
